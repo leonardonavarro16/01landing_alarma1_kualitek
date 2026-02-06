@@ -1,6 +1,10 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { useGsapStagger } from "@/hooks/useGsapStagger";
 
 const testimonials = [
   {
@@ -8,7 +12,7 @@ const testimonials = [
     role: "Director de Operaciones",
     company: "LogiTrans S.L.",
     content:
-      "Kualitek nos instaló 24 cámaras en nuestro almacén logístico. La calidad de imagen es impresionante y poder ver todo desde el móvil nos da total tranquilidad. Servicio impecable.",
+      "Kualitek instaló un sistema de alarma conectado a central receptora en nuestro almacén. Desde entonces tenemos detección temprana y respuesta profesional. Servicio impecable.",
     rating: 5,
   },
   {
@@ -16,7 +20,7 @@ const testimonials = [
     role: "Gerente",
     company: "Clínica Dental Sonríe",
     content:
-      "Necesitábamos cámaras en la clínica sin obras complicadas. El equipo de Kualitek instaló un sistema inalámbrico perfecto. Rápidos, limpios y muy profesionales.",
+      "Necesitábamos una alarma sin obras complicadas. El equipo de Kualitek instaló sensores inalámbricos y nos dejaron todo funcionando en un día. Muy profesionales.",
     rating: 5,
   },
   {
@@ -24,16 +28,19 @@ const testimonials = [
     role: "Propietario",
     company: "Restaurante El Fogón",
     content:
-      "Después de un robo decidimos instalar CCTV. Kualitek nos asesoró con el mejor sistema para nuestro presupuesto y ahora tenemos cobertura total. 100% recomendados.",
+      "Tras varios intentos de acceso no autorizado, instalamos alarma y sensores perimetrales con Kualitek. Hemos reducido incidentes y dormimos más tranquilos.",
     rating: 5,
   },
 ];
 
 export default function Testimonials() {
+  const headerRef = useGsapReveal({ y: 40, duration: 0.7 });
+  const gridRef = useGsapStagger({ y: 50, stagger: 0.2, duration: 0.7, start: "top 80%" });
+
   return (
     <section id="testimonios" className="bg-brand-cream py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
             variant="secondary"
             className="mb-4 border-brand-primary/20 bg-brand-primary/5 text-brand-primary"
@@ -41,15 +48,15 @@ export default function Testimonials() {
             Testimonios
           </Badge>
           <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
-            Empresas que ya confían en nosotros
+            Clientes que ya confían en nosotros
           </h2>
           <p className="mt-4 text-lg text-neutral-600">
-            Más de 500 empresas han elegido Kualitek para proteger sus
-            instalaciones con cámaras de seguridad.
+            Más de 500 clientes han elegido Kualitek para proteger sus
+            hogares y negocios con sistemas de alarma y monitorización profesional.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial) => (
             <Card
               key={testimonial.name}

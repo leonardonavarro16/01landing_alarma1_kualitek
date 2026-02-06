@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title:
     "Kualitek | Instaladores Profesionales de Cámaras de Seguridad CCTV en Barcelona y Madrid",
   description:
-    "Instalación profesional de cámaras de vigilancia, sistemas CCTV, grabadores de video y cableado estructurado para empresas. Presupuesto gratuito. Cobertura en Barcelona, Madrid y toda España.",
+    "Instalación profesional de cámaras de vigilancia, sistemas CCTV, alarmas y sensores para hogares, negocios y comunidades. Presupuesto gratuito. Cobertura en Barcelona, Madrid y toda España.",
   keywords: [
     "instalación cámaras seguridad",
     "CCTV Barcelona",
     "CCTV Madrid",
-    "cámaras de vigilancia empresas",
+    "cámaras de vigilancia hogar y empresas",
     "instaladores CCTV",
     "videovigilancia profesional",
     "cámaras IP",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kualitek | Instaladores Profesionales de Cámaras CCTV",
     description:
-      "Protege tu negocio con sistemas de videovigilancia de última generación. Instalación profesional en Barcelona y Madrid.",
+      "Protege tu hogar o negocio con sistemas de videovigilancia de última generación. Instalación profesional en Barcelona y Madrid.",
     type: "website",
     locale: "es_ES",
     url: "https://kualitek.com",

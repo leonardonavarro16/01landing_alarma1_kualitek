@@ -1,10 +1,15 @@
+"use client";
+
 import { Separator } from "@/components/ui/separator";
 import { Camera, MapPin, Mail, Phone } from "lucide-react";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 export default function Footer() {
+  const contentRef = useGsapReveal({ y: 30, duration: 0.6 });
+
   return (
     <footer className="bg-black text-neutral-400">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div ref={contentRef} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -15,8 +20,8 @@ export default function Footer() {
               <span className="text-xl font-bold text-white">Kualitek</span>
             </a>
             <p className="mt-4 text-sm leading-relaxed">
-              Instaladores profesionales de cámaras de seguridad CCTV para
-              empresas y negocios. Más de 15 años de experiencia protegiendo
+              Instaladores profesionales de alarmas y sistemas de seguridad
+              para hogares, negocios y comunidades. Más de 15 años de experiencia protegiendo
               lo que más importa.
             </p>
           </div>
@@ -29,27 +34,27 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <a href="#servicios" className="transition-colors hover:text-white">
-                  Cámaras IP de Alta Resolución
+                  Alarmas conectadas a CRA
                 </a>
               </li>
               <li>
                 <a href="#servicios" className="transition-colors hover:text-white">
-                  Sistemas DVR/NVR
+                  Sensores de movimiento y contacto
                 </a>
               </li>
               <li>
                 <a href="#servicios" className="transition-colors hover:text-white">
-                  Monitoreo Remoto
+                  Monitorización 24/7
                 </a>
               </li>
               <li>
                 <a href="#servicios" className="transition-colors hover:text-white">
-                  Cableado Estructurado
+                  Integración con CCTV
                 </a>
               </li>
               <li>
                 <a href="#servicios" className="transition-colors hover:text-white">
-                  Mantenimiento Preventivo
+                  Mantenimiento y soporte
                 </a>
               </li>
             </ul>

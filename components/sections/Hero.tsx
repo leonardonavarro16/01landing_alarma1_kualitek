@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Grainient from "@/components/Grainient";
+import { gsap } from "@/lib/gsap";
 import {
   Camera,
   CheckCircle,
@@ -24,6 +25,36 @@ export default function Hero() {
     mensaje: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      tl.from(".hero-badge", { y: 30, opacity: 0, duration: 0.6 })
+        .from(".hero-heading", { y: 30, opacity: 0, duration: 0.7 }, "-=0.3")
+        .from(".hero-description", { y: 30, opacity: 0, duration: 0.6 }, "-=0.3")
+        .from(".hero-feature", { y: 30, opacity: 0, duration: 0.5, stagger: 0.15 }, "-=0.2");
+    }, leftRef);
+
+    const ctx2 = gsap.context(() => {
+      gsap.from(rightRef.current, {
+        x: 40,
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.5,
+        ease: "power2.out",
+      });
+    });
+
+    return () => {
+      ctx.revert();
+      ctx2.revert();
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,38 +90,36 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         {/* Left: Copy */}
-        <div className="text-center lg:text-left">
+        <div ref={leftRef} className="text-center lg:text-left">
           <Badge
             variant="secondary"
-            className="mb-6 border-white/20 bg-white/10 text-brand-cream backdrop-blur-sm"
+            className="hero-badge mb-6 border-white/20 bg-white/10 text-brand-cream backdrop-blur-sm"
           >
-            <Camera className="mr-1.5 h-3.5 w-3.5" />
-            Instaladores Profesionales de CCTV
+            <ShieldCheck className="mr-1.5 h-3.5 w-3.5" />
+            Instalación de alarmas profesionales
           </Badge>
 
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Instalación de{" "}
-            <span className="text-brand-cream">
-              cámaras de seguridad
-            </span>{" "}
-            para tu negocio
+          <h1 className="hero-heading text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Protege lo que más importa con una
+            <span className="text-brand-cream"> alarma profesional </span>
+            instalada y monitorizada
           </h1>
 
-          <p className="mt-6 text-lg leading-relaxed text-white/80 sm:text-xl">
-            Protege tu empresa con sistemas de videovigilancia CCTV de última
-            generación. Instalación profesional, configuración remota y soporte
-            técnico en Barcelona y Madrid.
+          <p className="hero-description mt-6 text-lg leading-relaxed text-white/80 sm:text-xl">
+            Sistemas de alarma conectados a central receptora y monitorización
+            24/7. Instalación certificada, respuesta rápida y opciones sin
+            compromiso para hogares, negocios y comunidades.
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              { icon: Camera, label: "Cámaras IP/HD" },
-              { icon: ShieldCheck, label: "Monitoreo 24/7" },
-              { icon: Wifi, label: "Acceso remoto" },
+              { icon: ShieldCheck, label: "Instalación rápida (24-72h)" },
+              { icon: ShieldCheck, label: "Monitoreo 24/7 y respuesta" },
+              { icon: Wifi, label: "App y control remoto" },
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/10 px-4 py-3 backdrop-blur-md"
+                className="hero-feature flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/10 px-4 py-3 backdrop-blur-md"
               >
                 <item.icon className="h-5 w-5 shrink-0 text-brand-cream" />
                 <span className="text-sm font-medium text-white">
@@ -102,7 +131,7 @@ export default function Hero() {
         </div>
 
         {/* Right: Form */}
-        <Card className="border-white/15 bg-black/40 shadow-2xl backdrop-blur-xl">
+        <Card ref={rightRef} className="border-white/15 bg-black/40 shadow-2xl backdrop-blur-xl">
           <CardHeader className="pb-4">
             <CardTitle className="text-center text-2xl font-bold text-white">
               Presupuesto gratuito
@@ -137,7 +166,7 @@ export default function Hero() {
                     className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
                   />
                   <Input
-                    placeholder="Empresa"
+                    placeholder="Empresa / Particular"
                     value={formData.empresa}
                     onChange={(e) =>
                       setFormData({ ...formData, empresa: e.target.value })
@@ -166,7 +195,7 @@ export default function Hero() {
                   className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
                 />
                 <textarea
-                  placeholder="Cuéntanos qué necesitas (n.º de cámaras, tipo de local, etc.)..."
+                  placeholder="Cuéntanos qué necesitas (tipo de inmueble, n.º de sensores, superficie, etc.)..."
                   rows={3}
                   value={formData.mensaje}
                   onChange={(e) =>

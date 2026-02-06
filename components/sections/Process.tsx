@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   MessageSquare,
@@ -5,43 +8,73 @@ import {
   Wrench,
   HeadphonesIcon,
 } from "lucide-react";
+import { gsap } from "@/lib/gsap";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 const steps = [
   {
     icon: MessageSquare,
     step: "01",
-    title: "Consulta gratuita",
+    title: "Visita técnica gratuita",
     description:
-      "Visitamos tu local o empresa para analizar las necesidades de seguridad: puntos de cobertura, número de cámaras e infraestructura existente.",
+      "Analizamos tu espacio, puntos vulnerables y proponemos la mejor solución de alarma y sensores.",
   },
   {
     icon: ClipboardCheck,
     step: "02",
-    title: "Presupuesto a medida",
+    title: "Presupuesto claro y sin sorpresas",
     description:
-      "Diseñamos una solución personalizada con el mejor equipamiento para tu presupuesto. Todo detallado y sin sorpresas.",
+      "Recibes una propuesta detallada con opciones según riesgo y presupuesto, incluido tiempo de instalación.",
   },
   {
     icon: Wrench,
     step: "03",
     title: "Instalación profesional",
     description:
-      "Nuestros técnicos certificados realizan la instalación completa: cableado, montaje de cámaras, grabadores y configuración del sistema.",
+      "Técnicos certificados montan sensores, central y conexionado a la central receptora (si aplica).",
   },
   {
     icon: HeadphonesIcon,
     step: "04",
-    title: "Formación y soporte",
+    title: "Formación y mantenimiento",
     description:
-      "Te enseñamos a usar el sistema, configuramos el acceso remoto en tu móvil y te ofrecemos soporte técnico continuo.",
+      "Te formamos, activamos la monitorización y ofrecemos planes de mantenimiento y soporte 24/7.",
   },
 ];
 
 export default function Process() {
+  const headerRef = useGsapReveal({ y: 40, duration: 0.7 });
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        defaults: { ease: "power2.out" },
+      });
+
+      steps.forEach((_, i) => {
+        tl.from(`.process-step-${i}`, { y: 50, opacity: 0, duration: 0.6 }, i === 0 ? undefined : "-=0.1");
+        if (i < steps.length - 1) {
+          tl.from(`.process-connector-${i}`, { scaleX: 0, duration: 0.4, transformOrigin: "left center" }, "-=0.1");
+        }
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="proceso" className="bg-black py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
             variant="secondary"
             className="mb-4 border-brand-primary/20 bg-brand-primary/10 text-brand-primary"
@@ -49,20 +82,20 @@ export default function Process() {
             Cómo trabajamos
           </Badge>
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Tu sistema CCTV instalado en 4 pasos
+            Instalación de alarmas en 4 pasos
           </h2>
           <p className="mt-4 text-lg text-neutral-400">
-            Un proceso claro y eficiente para que tu negocio esté protegido
-            cuanto antes.
+            Un proceso claro y eficiente para que tu alarma esté operativa y
+            tu espacio protegido cuanto antes.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={gridRef} className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <div key={step.step} className="relative text-center">
+            <div key={step.step} className={`process-step-${index} relative text-center`}>
               {/* Connector line */}
               {index < steps.length - 1 && (
-                <div className="absolute left-1/2 top-10 hidden h-0.5 w-full bg-linear-to-r from-brand-primary/30 to-transparent lg:block" />
+                <div className={`process-connector-${index} absolute left-1/2 top-10 hidden h-0.5 w-full bg-linear-to-r from-brand-primary/30 to-transparent lg:block`} />
               )}
 
               <div className="relative mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm">

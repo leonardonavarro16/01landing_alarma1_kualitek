@@ -1,58 +1,58 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Camera,
-  Video,
-  Smartphone,
-  HardDrive,
-  Wifi,
-  Wrench,
-} from "lucide-react";
+import { Smartphone, HardDrive, Wifi, Wrench, ShieldCheck } from "lucide-react";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { useGsapStagger } from "@/hooks/useGsapStagger";
 
 const services = [
   {
-    icon: Camera,
-    title: "Cámaras IP de Alta Resolución",
+    icon: ShieldCheck,
+    title: "Alarmas conectadas a CRA",
     description:
-      "Instalación de cámaras IP con resolución 4K y 8MP. Visión nocturna avanzada, detección de movimiento inteligente y ángulos de cobertura optimizados.",
-  },
-  {
-    icon: Video,
-    title: "Sistemas DVR/NVR",
-    description:
-      "Configuración de grabadores digitales con almacenamiento en disco duro y en la nube. Acceso a grabaciones desde cualquier dispositivo.",
+      "Sistemas de alarma con conexión a central receptora para respuesta profesional y verificación de incidencias 24/7.",
   },
   {
     icon: Smartphone,
-    title: "Monitoreo desde el Móvil",
+    title: "Notificaciones y control desde el móvil",
     description:
-      "Visualiza tus cámaras en tiempo real desde tu smartphone o tablet. Alertas instantáneas ante cualquier incidencia.",
-  },
-  {
-    icon: HardDrive,
-    title: "Cableado Estructurado",
-    description:
-      "Instalación profesional de cableado Cat6/Cat6a y fibra óptica. Infraestructura certificada para máximo rendimiento de tus cámaras.",
-  },
-  {
-    icon: Wifi,
-    title: "Cámaras Inalámbricas",
-    description:
-      "Soluciones WiFi para zonas de difícil acceso. Conexión estable y segura sin necesidad de cableado adicional.",
+      "Recibe alertas instantáneas y controla tu alarma desde la app: armar/desarmar, historial de eventos y notificaciones push.",
   },
   {
     icon: Wrench,
-    title: "Mantenimiento Preventivo",
+    title: "Sensores de movimiento y contacto",
     description:
-      "Servicio de revisión periódica, limpieza de lentes, actualización de firmware y soporte técnico para mantener tus cámaras siempre operativas.",
+      "Tecnología avanzada de detección para interiores y perímetros: sensores volumétricos, magnéticos de puerta/ventana y detectores perimetrales.",
+  },
+  {
+    icon: HardDrive,
+    title: "Integración con CCTV y domótica",
+    description:
+      "Conectamos la alarma con tu sistema de cámaras y soluciones domóticas para una gestión de seguridad unificada.",
+  },
+  {
+    icon: Wifi,
+    title: "Opciones cableadas e inalámbricas",
+    description:
+      "Soluciones sin obra o con cableado profesional según tu espacio y necesidades de seguridad.",
+  },
+  {
+    icon: Wrench,
+    title: "Mantenimiento y soporte",
+    description:
+      "Contratos de mantenimiento, revisiones periódicas y atención técnica para garantizar que tu sistema siempre funcione.",
   },
 ];
 
 export default function Services() {
+  const headerRef = useGsapReveal({ y: 40, duration: 0.7 });
+  const gridRef = useGsapStagger({ y: 50, stagger: 0.12, duration: 0.6, start: "top 80%" });
+
   return (
     <section id="servicios" className="bg-brand-cream py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
             variant="secondary"
             className="mb-4 border-brand-primary/20 bg-brand-primary/5 text-brand-primary"
@@ -68,7 +68,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <Card
               key={service.title}
