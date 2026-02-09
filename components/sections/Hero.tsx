@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Grainient from "@/components/Grainient";
+import { VideoBackground } from "@/components/VideoBackground";
 import { gsap } from "@/lib/gsap";
 import {
   Camera,
@@ -80,13 +81,15 @@ export default function Hero() {
 
   return (
     <section id="contacto" className="relative min-h-screen overflow-hidden">
-      {/* Grainient animated background */}
-      <div className="absolute inset-0">
-        <Grainient className="h-full w-full" />
-      </div>
+      {/* Video background with fallback */}
+      <VideoBackground
+        src="/videos/hero-security.mp4"
+        poster="/videos/hero-security-poster.jpg"
+        fallback={<Grainient className="h-full w-full" />}
+      />
 
       {/* Dark overlay for readability */}
-      <div className="pointer-events-none absolute inset-0 bg-black/40" />
+      <div className="pointer-events-none absolute inset-0 bg-black/50" />
 
       <div className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 py-16 sm:py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         {/* Left: Copy */}

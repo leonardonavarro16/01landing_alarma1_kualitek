@@ -3,155 +3,299 @@
 import { useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
-  AlertTriangle,
   ShieldCheck,
   Smartphone,
   Radar,
   HeadphonesIcon,
-  ArrowDown,
-  ImageIcon,
+  CheckCircle,
 } from "lucide-react";
 import { gsap } from "@/lib/gsap";
-import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { GridPattern } from "@/components/ui/patterns";
 
-const services = [
+const benefits = [
   {
-    problemIcon: AlertTriangle,
-    solutionIcon: ShieldCheck,
-    problem: "¿Te preocupa no enterarte de una intrusión a tiempo?",
-    title: "Alarma conectada a CRA",
-    solution:
-      "Alarmas conectadas a central receptora (CRA) con verificación y respuesta profesional 24/7. Si salta tu alarma, actuamos en minutos.",
+    number: "01",
+    icon: ShieldCheck,
+    title: "Monitoreo Profesional 24/7 Conectado a Central Receptora",
+    subtitle: "Nunca estás solo ante una emergencia",
+    descriptions: [
+      "Tu alarma está conectada a una central receptora (CRA) con operadores profesionales que reciben señales en tiempo real, 24/7, los 365 días del año.",
+      "Cuando salta tu alarma, verificamos la situación, te contactamos inmediatamente y si es necesario, enviamos ayuda: policía, bomberos o servicios médicos.",
+    ],
+    features: [
+      "Verificación profesional antes de actuar",
+      "Contacto inmediato con autoridades",
+      "Protocolo anti-falsas alarmas",
+      "Tiempo de respuesta < 2 minutos",
+    ],
+    placeholderType: "gradient" as const,
   },
   {
-    problemIcon: AlertTriangle,
-    solutionIcon: Smartphone,
-    problem: "¿No puedes estar pendiente de tu casa o negocio todo el día?",
-    title: "Control total desde el móvil",
-    solution:
-      "Controla tu alarma desde el móvil: armar, desarmar, ver el historial y recibir alertas instantáneas estés donde estés.",
+    number: "02",
+    icon: Smartphone,
+    title: "Control Total Desde Tu Smartphone, Estés Donde Estés",
+    subtitle: "Tu seguridad en la palma de tu mano",
+    descriptions: [
+      "Con nuestra app móvil controlas tu sistema desde cualquier lugar: arma/desarma zonas, consulta historial completo y recibe notificaciones push instantáneas.",
+      "Tecnología IoT de última generación que te mantiene conectado y en control absoluto, sin importar dónde estés.",
+    ],
+    features: [
+      "App iOS/Android intuitiva",
+      "Notificaciones push en tiempo real",
+      "Historial de eventos detallado",
+      "Control por zonas independientes",
+    ],
+    placeholderType: "blur" as const,
   },
   {
-    problemIcon: AlertTriangle,
-    solutionIcon: Radar,
-    problem: "¿Tienes puntos ciegos o accesos sin proteger?",
-    title: "Sensores inteligentes",
-    solution:
-      "Sensores de movimiento, contacto magnético en puertas y ventanas, y detectores perimetrales que cubren cada rincón de tu espacio.",
+    number: "03",
+    icon: Radar,
+    title: "Instalación Profesional Rápida y Sin Obras Molestas",
+    subtitle: "Mínima interrupción, máxima protección",
+    descriptions: [
+      "No necesitas reformas. Técnicos certificados instalan sensores PIR, contactos magnéticos y detectores perimetrales que cubren cada rincón crítico.",
+      "Instalación limpia y profesional en pocas horas. Tu día a día apenas se afecta, pero tu seguridad cambia para siempre.",
+    ],
+    features: [
+      "Sensores inalámbricos última generación",
+      "Técnicos certificados y asegurados",
+      "Instalación en 1-2 días máximo",
+      "Cobertura completa sin puntos ciegos",
+    ],
+    placeholderType: "pattern" as const,
   },
   {
-    problemIcon: AlertTriangle,
-    solutionIcon: HeadphonesIcon,
-    problem: "¿Y si algo falla y no te das cuenta?",
-    title: "Mantenimiento y soporte 24/7",
-    solution:
-      "Revisiones periódicas, monitorización del estado del sistema y soporte técnico disponible las 24 horas para que nunca te quedes desprotegido.",
+    number: "04",
+    icon: HeadphonesIcon,
+    title: "Soporte 24/7, Mantenimiento y Garantía Extendida",
+    subtitle: "Protección continua sin preocupaciones",
+    descriptions: [
+      "Monitorizamos el estado de tu sistema constantemente: batería, conexión, comunicación con CRA. Si algo falla, lo sabemos antes que tú.",
+      "Incluye revisiones periódicas, soporte técnico 24/7 y garantía de 2 años en todos los equipos. Tu inversión está protegida.",
+    ],
+    features: [
+      "Monitorización remota del sistema",
+      "Mantenimiento preventivo incluido",
+      "Soporte técnico telefónico 24/7",
+      "Garantía extendida 2 años",
+    ],
+    placeholderType: "gradient" as const,
   },
 ];
 
-function ServiceCard({
-  service,
-  index,
+function BenefitPlaceholder({
+  type,
+  Icon,
 }: {
-  service: (typeof services)[number];
-  index: number;
+  type: "gradient" | "blur" | "pattern";
+  Icon: typeof ShieldCheck;
 }) {
+  if (type === "gradient") {
+    return (
+      <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-linear-to-br from-brand-primary/20 via-brand-cream to-brand-primary/10">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Icon className="h-32 w-32 text-brand-primary/30" />
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "blur") {
+    return (
+      <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-neutral-950">
+        <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-brand-primary/30 blur-3xl" />
+        <div className="absolute right-1/4 bottom-1/4 h-64 w-64 rounded-full bg-brand-cream/20 blur-3xl" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <Icon className="h-28 w-28 text-white/30" />
+        </div>
+      </div>
+    );
+  }
+
+  // pattern
   return (
-    <div className="service-card group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/30 hover:shadow-xl">
-      {/* Imagen placeholder — reemplazar con <Image> cuando tengas fotos */}
-      <div className="relative aspect-video w-full overflow-hidden bg-neutral-200">
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-neutral-400">
-          <ImageIcon className="h-8 w-8" />
-          <span className="text-xs font-medium">Foto {index + 1}</span>
-        </div>
-      </div>
-
-      {/* Problema */}
-      <div className="relative bg-neutral-900 px-5 py-4">
-        <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-red-500/20">
-          <service.problemIcon className="h-4 w-4 text-red-400" />
-        </div>
-        <p className="text-sm font-medium leading-relaxed text-white/80">
-          {service.problem}
-        </p>
-        <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 translate-y-1/2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary shadow-md">
-            <ArrowDown className="h-3 w-3 text-white" />
-          </div>
-        </div>
-      </div>
-
-      {/* Solucion */}
-      <div className="flex flex-1 flex-col bg-white px-5 pb-5 pt-6">
-        <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-brand-primary/10 transition-colors group-hover:bg-brand-primary">
-          <service.solutionIcon className="h-5 w-5 text-brand-primary transition-colors group-hover:text-white" />
-        </div>
-        <h3 className="text-base font-semibold text-black">
-          {service.title}
-        </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">
-          {service.solution}
-        </p>
+    <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-neutral-900">
+      <GridPattern />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <Icon className="h-24 w-24 text-brand-cream/40" />
       </div>
     </div>
   );
 }
 
 export default function Services() {
-  const headerRef = useGsapReveal({ y: 40, duration: 0.7 });
-  const gridRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const sectionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = gridRef.current;
-    if (!el) return;
-
-    const cards = el.querySelectorAll(".service-card");
-
     const ctx = gsap.context(() => {
-      gsap.set(cards, { autoAlpha: 0, y: 40 });
+      // Header animation
+      gsap.fromTo(
+        ".header-section",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".header-section",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
 
-      gsap.to(cards, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          end: "top 20%",
-          toggleActions: "play reverse play reverse",
-        },
+      // Benefit sections
+      document.querySelectorAll(".benefit-section").forEach((section, index) => {
+        const image = section.querySelector(".benefit-image");
+        const content = section.querySelector(".benefit-content");
+        const bullets = section.querySelectorAll(".benefit-bullet");
+
+        // Image: Fade + Scale
+        gsap.fromTo(
+          image,
+          { y: 80, opacity: 0, scale: 0.95 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 75%",
+              end: "top 25%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Content: Slide from opposite side
+        const slideX = index % 2 === 0 ? 60 : -60;
+        gsap.fromTo(
+          content,
+          { x: slideX, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 70%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Bullets: Stagger
+        gsap.fromTo(
+          bullets,
+          { x: -20, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: content,
+              start: "top 60%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
       });
-    }, el);
+    });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="servicios" className="relative overflow-hidden bg-brand-cream py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
+    <section id="servicios" className="relative overflow-hidden bg-white">
+      {/* Header Section */}
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div ref={headerRef} className="header-section mx-auto max-w-3xl text-center">
           <Badge
             variant="secondary"
             className="mb-4 border-brand-primary/20 bg-brand-primary/5 text-brand-primary"
           >
             Protección integral
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
-            Problemas reales, soluciones profesionales
+          <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl lg:text-6xl">
+            ¿Por qué elegir nuestro sistema de alarmas?
           </h2>
-          <p className="mt-4 text-lg text-neutral-600">
-            Cada espacio tiene vulnerabilidades. Nosotros las identificamos y las
-            cubrimos con tecnología de alarma de última generación.
+          <p className="mt-6 text-xl leading-relaxed text-neutral-600">
+            Cuatro pilares fundamentales que garantizan la máxima protección
+            para tu hogar o negocio, sin complicaciones.
           </p>
         </div>
+      </div>
 
-        <div ref={gridRef} className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} />
-          ))}
-        </div>
+      {/* Benefits Sections */}
+      <div ref={sectionsRef}>
+        {benefits.map((benefit, index) => {
+          const isImageLeft = index % 2 === 0;
+          const bgClass = index % 2 !== 0 ? "bg-brand-cream/30" : "";
+
+          return (
+            <div key={benefit.number} className={`benefit-section ${bgClass}`}>
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="grid gap-8 py-12 md:gap-10 md:py-16 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
+                  {/* Image */}
+                  <div
+                    className={`benefit-image ${
+                      isImageLeft ? "order-2 lg:order-1" : "order-2"
+                    }`}
+                  >
+                    <BenefitPlaceholder
+                      type={benefit.placeholderType}
+                      Icon={benefit.icon}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div
+                    className={`benefit-content ${
+                      isImageLeft ? "order-1 lg:order-2" : "order-1"
+                    }`}
+                  >
+                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-primary/10 lg:h-20 lg:w-20">
+                      <span className="text-4xl font-bold text-brand-primary lg:text-5xl">
+                        {benefit.number}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold tracking-tight text-black sm:text-3xl lg:text-4xl">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-3 text-base font-medium text-brand-primary sm:mt-4 sm:text-lg">
+                      {benefit.subtitle}
+                    </p>
+                    <div className="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700 sm:mt-6 sm:space-y-4 sm:text-base lg:text-lg">
+                      {benefit.descriptions.map((desc, i) => (
+                        <p key={i}>{desc}</p>
+                      ))}
+                    </div>
+                    <ul className="mt-6 space-y-2 sm:mt-8 sm:space-y-3">
+                      {benefit.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="benefit-bullet flex items-start gap-3"
+                        >
+                          <CheckCircle className="h-5 w-5 shrink-0 text-brand-primary sm:h-6 sm:w-6" />
+                          <span className="text-sm text-neutral-700 sm:text-base">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
