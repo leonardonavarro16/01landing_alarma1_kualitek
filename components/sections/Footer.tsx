@@ -97,12 +97,12 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary" />
-                <span>Barcelona y Madrid, España</span>
+                <span>Ronda de Sant Pere 39, 1-2</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-brand-primary" />
-                <a href="tel:+34900000000" className="transition-colors hover:text-white">
-                  +34 900 000 000
+                <a href="tel:+34931310505" className="transition-colors hover:text-white">
+                  931310505
                 </a>
               </li>
               <li className="flex items-center gap-2">

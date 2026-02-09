@@ -46,8 +46,9 @@ export function useGsapStagger<T extends HTMLElement = HTMLDivElement>(
       ease,
       scrollTrigger: {
         trigger: container,
-        start,
-        toggleActions: "play none none none",
+         start: "top center",
+        end: "bottom center",
+        scrub: true,
       },
     });
 

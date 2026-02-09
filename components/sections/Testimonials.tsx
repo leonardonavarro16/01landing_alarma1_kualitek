@@ -56,7 +56,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div ref={gridRef} className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div ref={gridRef} className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial) => (
             <Card
               key={testimonial.name}
@@ -64,11 +64,11 @@ export default function Testimonials() {
             >
               <CardContent className="pt-6">
                 {/* Stars */}
-                <div className="mb-4 flex gap-1">
+                <div className="mb-3 sm:mb-4 flex gap-0.5 sm:gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
+                      className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-amber-400 text-amber-400"
                     />
                   ))}
                 </div>
@@ -78,14 +78,14 @@ export default function Testimonials() {
                 </p>
 
                 <div className="mt-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary text-sm font-bold text-white">
+                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-brand-primary text-xs sm:text-sm font-bold text-white">
                     {testimonial.name
                       .split(" ")
                       .map((n) => n[0])
                       .join("")}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-black">
+                    <p className="text-xs sm:text-sm font-semibold text-black">
                       {testimonial.name}
                     </p>
                     <p className="text-xs text-neutral-500">

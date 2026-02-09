@@ -57,17 +57,13 @@ function ServiceCard({
   index: number;
 }) {
   return (
-    <div
-      className={`service-card group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/30 hover:shadow-xl`}
-    >
-      {/* Imagen placeholder */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
+    <div className="service-card group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/30 hover:shadow-xl">
+      {/* Imagen placeholder — reemplazar con <Image> cuando tengas fotos */}
+      <div className="relative aspect-video w-full overflow-hidden bg-neutral-200">
         <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-neutral-400">
-          <ImageIcon className="h-10 w-10" />
-          <span className="text-xs">Imagen {index + 1}</span>
+          <ImageIcon className="h-8 w-8" />
+          <span className="text-xs font-medium">Foto {index + 1}</span>
         </div>
-        {/* Cuando tengas las imagenes, reemplaza el div de arriba con:
-            <Image src="/images/servicio-X.jpg" alt={service.title} fill className="object-cover" /> */}
       </div>
 
       {/* Problema */}
@@ -78,7 +74,7 @@ function ServiceCard({
         <p className="text-sm font-medium leading-relaxed text-white/80">
           {service.problem}
         </p>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+        <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 translate-y-1/2">
           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-primary shadow-md">
             <ArrowDown className="h-3 w-3 text-white" />
           </div>
@@ -86,9 +82,9 @@ function ServiceCard({
       </div>
 
       {/* Solucion */}
-      <div className="bg-white px-5 pb-5 pt-6">
+      <div className="flex flex-1 flex-col bg-white px-5 pb-5 pt-6">
         <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-brand-primary/10 transition-colors group-hover:bg-brand-primary">
-          <service.solutionIcon className="h-4.5 w-4.5 text-brand-primary transition-colors group-hover:text-white" />
+          <service.solutionIcon className="h-5 w-5 text-brand-primary transition-colors group-hover:text-white" />
         </div>
         <h3 className="text-base font-semibold text-black">
           {service.title}
@@ -109,18 +105,22 @@ export default function Services() {
     const el = gridRef.current;
     if (!el) return;
 
+    const cards = el.querySelectorAll(".service-card");
+
     const ctx = gsap.context(() => {
-      gsap.from(".service-card", {
-        y: 60,
-        opacity: 0,
-        scale: 0.96,
-        duration: 0.7,
-        stagger: 0.15,
+      gsap.set(cards, { autoAlpha: 0, y: 40 });
+
+      gsap.to(cards, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
         ease: "power2.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none none",
+          start: "top 85%",
+          end: "top 20%",
+          toggleActions: "play reverse play reverse",
         },
       });
     }, el);

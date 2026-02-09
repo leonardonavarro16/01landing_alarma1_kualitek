@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEAC - Story Rediseñada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .story-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1400px;
+        }
+
+        .story {
+            width: 360px;
+            height: 640px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        /* STORY 1 - HOOK */
+        .story-1 {
+            background: linear-gradient(135deg, #003DA5 0%, #0055DD 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: 100px 100px;
+        }
+
+        .story-1 > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-1 .logo {
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #003DA5;
+            font-size: 18px;
+        }
+
+        .story-1 .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .story-1 h1 {
+            color: white;
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .story-1 .emoji {
+            font-size: 60px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .story-1 .swipe {
+            background: #B8FF3C;
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: #003DA5;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        /* STORY 2 - BENEFICIOS */
+        .story-2 {
+            background: linear-gradient(180deg, #003DA5 0%, #0055DD 100%);
+            padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: 100px 100px;
+        }
+
+        .story-2 > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-2 .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .story-2 h2 {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .story-2 .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .benefits {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px 25px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(5px);
+        }
+
+        .benefit-icon {
+            font-size: 32px;
+            width: 55px;
+            height: 55px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .story-2 .badge {
+            background: #B8FF3C;
+            color: #003DA5;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* STORY 3 - CTA */
+        .story-3 {
+            background: linear-gradient(180deg, #003DA5 0%, #0055DD 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: 100px 100px;
+        }
+
+        .story-3 .content-wrapper {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 35px;
+        }
+
+        .story-3 .top-section {
+            text-align: center;
+        }
+
+        .story-3 .logo-large {
+            background: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #003DA5;
+            font-size: 28px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .story-3 h2 {
+            color: white;
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .story-3 .highlight {
+            background: #B8FF3C;
+            color: #003DA5;
+            padding: 2px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 800;
+        }
+
+        .story-3 .description {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .story-3 .middle-section {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .story-3 .cta-section {
+            text-align: center;
+        }
+
+        .cta-button {
+            background: #B8FF3C;
+            color: #003DA5;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(184, 255, 60, 0.4);
+            margin-bottom: 15px;
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .urgency {
+            color: #B8FF3C;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Progress bars en la parte superior */
+        .progress-bars {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            width: 100%;
+        }
+
+        .story-1 .progress-bar:nth-child(1) .progress-fill { width: 100%; }
+        .story-2 .progress-bar:nth-child(1) .progress-fill { width: 100%; }
+        .story-2 .progress-bar:nth-child(2) .progress-fill { width: 100%; }
+        .story-3 .progress-bar:nth-child(1) .progress-fill { width: 100%; }
+        .story-3 .progress-bar:nth-child(2) .progress-fill { width: 100%; }
+        .story-3 .progress-bar:nth-child(3) .progress-fill { width: 100%; }
+
+        /* Labels para identificar */
+        .story-label {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .story {
+                width: 320px;
+                height: 570px;
+            }
+            
+            .story-1 h1 {
+                font-size: 32px;
+            }
+            
+            .story-3 h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        
+        <!-- STORY 1: HOOK -->
+        <div class="story story-1">
+            <div class="progress-bars">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            
+            <div class="logo">CEAC</div>
+            
+            <div class="content">
+                <div class="emoji">🎬</div>
+                <h1>¿Quieres vivir de crear contenido?</h1>
+            </div>
+            
+            <div class="swipe">👆 Desliza para descubrir cómo</div>
+            
+            <div class="story-label">Story 1 - Hook</div>
+        </div>
+
+        <!-- STORY 2: BENEFICIOS -->
+        <div class="story story-2">
+            <div class="progress-bars">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            
+            <div class="header">
+                <h2>Aprende a:</h2>
+                <p class="subtitle">Lo que realmente importa</p>
+            </div>
+            
+            <div class="benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">📹</div>
+                    <div class="benefit-text">Crear contenido viral que conecta</div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-text">Monetizar tu audiencia desde día 1</div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-text">Estrategias de crecimiento real</div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">✨</div>
+                    <div class="benefit-text">Construir tu marca personal</div>
+                </div>
+            </div>
+            
+            <div class="badge">+ Adobe Creative Cloud incluido</div>
+            
+            <div class="story-label">Story 2 - Beneficios</div>
+        </div>
+
+        <!-- STORY 3: CTA -->
+        <div class="story story-3">
+            <div class="progress-bars">
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="top-section">
+                    <div class="logo-large">CEAC</div>
+                    <h2>
+                        Curso de<br>
+                        <span class="highlight">Creador de Contenido</span>
+                    </h2>
+                    <p class="description">
+                        Conviértete en influencer o streamer profesional
+                    </p>
+                </div>
+                
+                <div class="middle-section">
+                    <div class="info-row">
+                        <span class="info-label">Modalidad</span>
+                        <span class="info-value">100% Online</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Inicio</span>
+                        <span class="info-value">Abril 2026</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Prácticas</span>
+                        <span class="info-value">Garantizadas</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Incluye</span>
+                        <span class="info-value">Adobe CC 1 año</span>
+                    </div>
+                </div>
+                
+                <div class="cta-section">
+                    <div class="cta-button">
+                        Más información
+                    </div>
+                    <div class="urgency">⚡ Plazas limitadas ⚡</div>
+                </div>
+            </div>
+            
+            <div class="story-label">Story 3 - CTA Final</div>
+        </div>
+
+    </div>
+</body>
+</html>

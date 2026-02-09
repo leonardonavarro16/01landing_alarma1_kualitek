@@ -56,7 +56,7 @@ export default function Hero() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
 
@@ -76,7 +76,7 @@ export default function Hero() {
     } catch {
       setStatus("error");
     }
-  };
+  }
 
   return (
     <section id="contacto" className="relative min-h-screen overflow-hidden">
@@ -88,41 +88,43 @@ export default function Hero() {
       {/* Dark overlay for readability */}
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
+      <div className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 py-16 sm:py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         {/* Left: Copy */}
         <div ref={leftRef} className="text-center lg:text-left">
           <Badge
             variant="secondary"
             className="hero-badge mb-6 border-white/20 bg-white/10 text-brand-cream backdrop-blur-sm"
           >
-            <ShieldCheck className="mr-1.5 h-3.5 w-3.5" />
-            Instalación de alarmas profesionales
+            <Camera className="mr-1.5 h-3.5 w-3.5" />
+            Instaladores Profesionales de CCTV
           </Badge>
 
-          <h1 className="hero-heading text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Protege lo que más importa con una
-            <span className="text-brand-cream"> alarma profesional </span>
-            instalada y monitorizada
+          <h1 className="hero-heading text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+            Instalación de{" "}
+            <span className="text-brand-cream">
+              alarmas y sistemas de seguridad
+            </span>{" "}
+            para proteger lo que más importa
           </h1>
 
-          <p className="hero-description mt-6 text-lg leading-relaxed text-white/80 sm:text-xl">
-            Sistemas de alarma conectados a central receptora y monitorización
-            24/7. Instalación certificada, respuesta rápida y opciones sin
-            compromiso para hogares, negocios y comunidades.
+          <p className="hero-description mt-4 sm:mt-6 text-base leading-relaxed text-white/80 sm:text-lg md:text-xl">
+            Protege tu empresa con sistemas de videovigilancia CCTV de última
+            generación. Instalación profesional, configuración remota y soporte
+            técnico en Barcelona y Madrid.
           </p>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
             {[
-              { icon: ShieldCheck, label: "Instalación rápida (24-72h)" },
-              { icon: ShieldCheck, label: "Monitoreo 24/7 y respuesta" },
-              { icon: Wifi, label: "App y control remoto" },
+              { icon: Camera, label: "Cámaras IP/HD" },
+              { icon: ShieldCheck, label: "Monitoreo 24/7" },
+              { icon: Wifi, label: "Acceso remoto" },
             ].map((item) => (
               <div
                 key={item.label}
-                className="hero-feature flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/10 px-4 py-3 backdrop-blur-md"
+                className="hero-feature flex items-center gap-2 sm:gap-2.5 rounded-lg border border-white/10 bg-white/10 px-3 py-2.5 sm:px-4 sm:py-3 backdrop-blur-md"
               >
-                <item.icon className="h-5 w-5 shrink-0 text-brand-cream" />
-                <span className="text-sm font-medium text-white">
+                <item.icon className="h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-brand-cream" />
+                <span className="text-xs sm:text-sm font-medium text-white">
                   {item.label}
                 </span>
               </div>
@@ -195,7 +197,7 @@ export default function Hero() {
                   className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
                 />
                 <textarea
-                  placeholder="Cuéntanos qué necesitas (tipo de inmueble, n.º de sensores, superficie, etc.)..."
+                  placeholder="Cuéntanos qué necesitas (n.º de cámaras, tipo de local, etc.)..."
                   rows={3}
                   value={formData.mensaje}
                   onChange={(e) =>

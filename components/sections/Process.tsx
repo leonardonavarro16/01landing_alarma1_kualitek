@@ -90,25 +90,25 @@ export default function Process() {
           </p>
         </div>
 
-        <div ref={gridRef} className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={gridRef} className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <div key={step.step} className={`process-step-${index} relative text-center`}>
               {/* Connector line */}
               {index < steps.length - 1 && (
-                <div className={`process-connector-${index} absolute left-1/2 top-10 hidden h-0.5 w-full bg-linear-to-r from-brand-primary/30 to-transparent lg:block`} />
+                <div className={`process-connector-${index} absolute left-1/2 top-10 hidden h-0.5 w-full bg-linear-to-r from-brand-primary/30 to-transparent md:block`} />
               )}
 
-              <div className="relative mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm">
-                <step.icon className="h-8 w-8 text-brand-cream" />
-                <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-brand-primary text-xs font-bold text-white">
+              <div className="relative mx-auto mb-4 sm:mb-6 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-lg backdrop-blur-sm">
+                <step.icon className="h-6 w-6 sm:h-8 sm:w-8 text-brand-cream" />
+                <span className="absolute -right-1.5 sm:-right-2 -top-1.5 sm:-top-2 flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-brand-primary text-[10px] sm:text-xs font-bold text-white">
                   {step.step}
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-base sm:text-lg font-semibold text-white">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-400">
+              <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed text-neutral-400">
                 {step.description}
               </p>
             </div>

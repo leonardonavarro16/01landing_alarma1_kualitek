@@ -45,15 +45,15 @@ function StatCard({
   return (
     <div
       ref={cardRef}
-      className="group flex flex-col items-center rounded-2xl border border-neutral-100 bg-brand-cream p-8 text-center transition-all hover:border-brand-primary/20 hover:shadow-lg"
+      className="group flex flex-col items-center rounded-2xl border border-neutral-100 bg-brand-cream p-6 sm:p-8 text-center transition-all hover:border-brand-primary/20 hover:shadow-lg"
     >
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-primary/10">
-        <Icon className="h-7 w-7 text-brand-primary" />
+      <div className="mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-brand-primary/10">
+        <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-brand-primary" />
       </div>
-      <span ref={ref as React.RefObject<HTMLSpanElement>} className="text-3xl font-extrabold text-brand-primary">
+      <span ref={ref as React.RefObject<HTMLSpanElement>} className="text-2xl sm:text-3xl font-extrabold text-brand-primary">
         {display}
       </span>
-      <span className="mt-1 text-sm text-neutral-600">
+      <span className="mt-1 text-xs sm:text-sm text-neutral-600">
         {label}
       </span>
     </div>
@@ -78,16 +78,16 @@ export default function Stats() {
                 Por qué elegirnos
               </Badge>
               <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
-                Expertos en instalación de cámaras de seguridad
+                Expertos en instalación de alarmas y sistemas de seguridad
               </h2>
               <p className="mt-4 text-lg text-neutral-600">
-                En Kualitek llevamos más de 15 años instalando sistemas de
-                videovigilancia para hogares, negocios y comunidades. Nuestro equipo
+                En Kualitek llevamos más de 10 años instalando sistemas de
+                alarmas para hogares, negocios y comunidades. Nuestro equipo
                 técnico certificado garantiza una instalación impecable.
               </p>
             </div>
 
-            <ul ref={reasonsRef} className="mt-8 space-y-4">
+            <ul ref={reasonsRef} className="mt-8 space-y-3 sm:space-y-4">
               {reasons.map((reason) => (
                 <li key={reason} className="flex items-start gap-3">
                   <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-primary/10">
@@ -112,7 +112,7 @@ export default function Stats() {
           </div>
 
           {/* Right: Stats grid */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {stats.map((stat) => (
               <StatCard
                 key={stat.label}

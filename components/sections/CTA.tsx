@@ -71,10 +71,6 @@ export default function CTA() {
             variant="outline"
             className="border-white/20 text-base text-white hover:bg-white/10"
           >
-            <a href="tel:+34900000000">
-              <Phone className="mr-2 h-4 w-4" />
-              Llámanos ahora
-            </a>
           </Button>
         </div>
       </div>

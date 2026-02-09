@@ -10,6 +10,7 @@ export interface RevealOptions {
   delay?: number;
   ease?: string;
   start?: string;
+  scrub?: boolean;
 }
 
 export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
@@ -41,8 +42,9 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
       ease,
       scrollTrigger: {
         trigger: el,
-        start,
-        toggleActions: "play none none none",
+        start: "top center",
+        end: "bottom center",
+        scrub: true,
       },
     });
 
