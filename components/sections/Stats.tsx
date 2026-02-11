@@ -45,7 +45,7 @@ function StatCard({
   return (
     <div
       ref={cardRef}
-      className="group flex flex-col items-center rounded-2xl border border-neutral-100 bg-brand-cream p-6 sm:p-8 text-center transition-all hover:border-brand-primary/20 hover:shadow-lg"
+      className="group flex flex-col items-center rounded-2xl p-6 sm:p-8 text-center transition-transform duration-300 ease-in-out hover:scale-110"
     >
       <div className="mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-brand-primary/10">
         <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-brand-primary" />

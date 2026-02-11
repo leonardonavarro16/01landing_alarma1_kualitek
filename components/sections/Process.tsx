@@ -61,7 +61,7 @@ export default function Process() {
       });
 
       steps.forEach((_, i) => {
-        tl.from(`.process-step-${i}`, { y: 50, opacity: 0, duration: 0.6 }, i === 0 ? undefined : "-=0.1");
+        tl.from(`.process-step-${i}`, { y: 50, opacity: 0, duration: 0.3 }, i === 0 ? undefined : "-=0.1");
         if (i < steps.length - 1) {
           tl.from(`.process-connector-${i}`, { scaleX: 0, duration: 0.4, transformOrigin: "left center" }, "-=0.1");
         }
@@ -72,8 +72,8 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="proceso" className="bg-black py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="proceso" className="bg-black py-20  sm:py-28 h-[75vh]">
+      <div className="mx-auto  max-w-7xl px-4 sm:px-6 lg:px-8">
         <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
             variant="secondary"

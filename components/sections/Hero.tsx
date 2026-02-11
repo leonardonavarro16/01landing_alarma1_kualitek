@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Grainient from "@/components/Grainient";
-import { VideoBackground } from "@/components/VideoBackground";
 import { gsap } from "@/lib/gsap";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import {
   Camera,
   CheckCircle,
@@ -22,7 +23,6 @@ export default function Hero() {
     nombre: "",
     email: "",
     telefono: "",
-    empresa: "",
     mensaje: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -57,20 +57,47 @@ export default function Hero() {
     };
   }, []);
 
+  // Capitalizar primera letra de cada palabra
+  function capitalizeWords(text: string): string {
+    return text
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  // Manejar cambio de nombre con capitalización
+  function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    // Solo capitalizar cuando termine de escribir una palabra (cuando escribe un espacio o sale del input)
+    setFormData({ ...formData, nombre: value });
+  }
+
+  // Capitalizar al salir del input
+  function handleNameBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const capitalized = capitalizeWords(e.target.value);
+    setFormData({ ...formData, nombre: capitalized });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
+
+    // Asegurar que el nombre esté capitalizado antes de enviar
+    const dataToSend = {
+      ...formData,
+      nombre: capitalizeWords(formData.nombre),
+    };
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
 
       if (res.ok) {
         setStatus("success");
-        setFormData({ nombre: "", email: "", telefono: "", empresa: "", mensaje: "" });
+        setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
       } else {
         setStatus("error");
       }
@@ -80,29 +107,21 @@ export default function Hero() {
   }
 
   return (
-    <section id="contacto" className="relative min-h-screen overflow-hidden">
-      {/* Video background with fallback */}
-      <VideoBackground
-        src="/videos/hero-security.mp4"
-        poster="/videos/hero-security-poster.jpg"
-        fallback={<Grainient className="h-full w-full" />}
-      />
+    <section id="contacto" className="relative min-h-screen bg-neutral-900">
+      {/* Temporary background (replace with video later) */}
+      <div className="absolute inset-0">
+        <Grainient className="h-full w-full" />
+      </div>
 
       {/* Dark overlay for readability */}
-      <div className="pointer-events-none absolute inset-0 bg-black/50" />
+      <div className="pointer-events-none absolute inset-0 bg-black/40" />
 
       <div className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 py-16 sm:py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         {/* Left: Copy */}
         <div ref={leftRef} className="text-center lg:text-left">
-          <Badge
-            variant="secondary"
-            className="hero-badge mb-6 border-white/20 bg-white/10 text-brand-cream backdrop-blur-sm"
-          >
-            <Camera className="mr-1.5 h-3.5 w-3.5" />
-            Instaladores Profesionales de CCTV
-          </Badge>
+         
 
-          <h1 className="hero-heading text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="hero-heading text-3xl font-extrabold leading-normaltracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
             Instalación de{" "}
             <span className="text-brand-cream">
               alarmas y sistemas de seguridad
@@ -160,25 +179,14 @@ export default function Hero() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Input
-                    placeholder="Nombre *"
-                    required
-                    value={formData.nombre}
-                    onChange={(e) =>
-                      setFormData({ ...formData, nombre: e.target.value })
-                    }
-                    className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
-                  />
-                  <Input
-                    placeholder="Empresa / Particular"
-                    value={formData.empresa}
-                    onChange={(e) =>
-                      setFormData({ ...formData, empresa: e.target.value })
-                    }
-                    className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
-                  />
-                </div>
+                <Input
+                  placeholder="Nombre *"
+                  required
+                  value={formData.nombre}
+                  onChange={handleNameChange}
+                  onBlur={handleNameBlur}
+                  className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
+                />
                 <Input
                   type="email"
                   placeholder="Email *"
@@ -189,15 +197,16 @@ export default function Hero() {
                   }
                   className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
                 />
-                <Input
-                  type="tel"
+                <PhoneInput
+                  international
+                  defaultCountry="ES"
                   placeholder="Teléfono *"
-                  required
                   value={formData.telefono}
-                  onChange={(e) =>
-                    setFormData({ ...formData, telefono: e.target.value })
+                  onChange={(value) =>
+                    setFormData({ ...formData, telefono: value || "" })
                   }
-                  className="border-white/10 bg-white/10 text-white placeholder:text-white/40 focus-visible:ring-brand-primary"
+                  className="phone-input-custom border-white/10 bg-white/10 text-white rounded-md"
+                  required
                 />
                 <textarea
                   placeholder="Cuéntanos qué necesitas (n.º de cámaras, tipo de local, etc.)..."
@@ -232,7 +241,7 @@ export default function Hero() {
                   </p>
                 )}
                 <p className="text-center text-xs text-white/40">
-                  Sin compromiso. Tus datos están protegidos.
+                Tus datos están protegidos.
                 </p>
               </form>
             )}

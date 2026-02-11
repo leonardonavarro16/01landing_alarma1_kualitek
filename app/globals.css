@@ -102,3 +102,56 @@
     scroll-behavior: smooth;
   }
 }
+
+/* Estilos personalizados para PhoneInput */
+.PhoneInput {
+  display: flex;
+  align-items: center;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  color: white;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.PhoneInputInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.PhoneInputInput:focus {
+  border-color: #f6331a;
+  ring: 2px;
+  ring-color: #f6331a;
+}
+
+.PhoneInputCountry {
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+}
+
+.PhoneInputCountrySelect {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.PhoneInputCountrySelect:focus {
+  outline: none;
+}
+
+.PhoneInputCountryIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}

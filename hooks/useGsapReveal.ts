@@ -40,11 +40,11 @@ export function useGsapReveal<T extends HTMLElement = HTMLDivElement>(
       duration,
       delay,
       ease,
+      clearProps: "transform",
       scrollTrigger: {
         trigger: el,
-        start: "top center",
-        end: "bottom center",
-        scrub: true,
+        start: "top 80%",
+        toggleActions: "play none none none",
       },
     });
 

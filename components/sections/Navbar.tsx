@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Camera } from "lucide-react";
+import { Menu } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 
 const navLinks = [
@@ -29,16 +29,15 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/80 backdrop-blur-xl">
+    <header ref={headerRef} className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-gray-50 backdrop-blur-xl shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-primary">
-            <Camera className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-white">
-            Kualitek
-          </span>
+          <img
+            src="/logos/logoalarmasbarcelona.png"
+            alt="Alarmas Barcelona Logo"
+            className="h-45 w-auto mt-2"
+          />
         </a>
 
         {/* Desktop nav */}
@@ -47,7 +46,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-brand-slate transition-colors hover:text-white"
+              className="text-sm font-medium text-neutral-700 transition-colors hover:text-brand-primary"
             >
               {link.label}
             </a>
@@ -67,18 +66,18 @@ export default function Navbar() {
         {/* Mobile menu */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+            <Button variant="ghost" size="icon" className="text-neutral-700 hover:bg-neutral-100">
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-72 border-white/5 bg-black">
+          <SheetContent side="right" className="w-72 border-neutral-200 bg-white">
             <nav className="mt-8 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-lg font-medium text-neutral-300 transition-colors hover:text-white"
+                  className="text-lg font-medium text-neutral-700 transition-colors hover:text-brand-primary"
                 >
                   {link.label}
                 </a>

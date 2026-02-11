@@ -7,15 +7,15 @@ import AutoPlay from "embla-carousel-autoplay";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 const partners = [
-  { name: "Yealink", logo: "/yealink_logo.png" },
-  { name: "Dahua", logo: "/dahua_logo.png" },
-  { name: "Hikvision", logo: "/hikvision_logo.png" },
-  { name: "Ubiquiti", logo: "/ubiquiti_logo.png" },
-  { name: "Google Partner", logo: "/googlePartnersLogo.png" },
-  { name: "Cisco", logo: "/ciscoLogo.png" },
-  { name: "MikroTik", logo: "/mikrorik logo.png" },
-  { name: "ZoiPer", logo: "/zoiper.png" },
-  { name: "Amazon Web Services", logo: "/awsLogo.png" },
+  { name: "Yealink", logo: "/logos/Yealink_logo.png" },
+  { name: "Dahua", logo: "/logos/dahua_logo.png" },
+  { name: "Hikvision", logo: "/logos/hikvision_logo.png" },
+  { name: "Ubiquiti", logo: "/logos/Ubiquiti_Logo.png" },
+  { name: "Google Partner", logo: "/logos/googlePartnersLogo.png" },
+  { name: "Cisco", logo: "/logos/ciscoLogo.png" },
+  { name: "MikroTik", logo: "/logos/microrik logo.png" },
+  { name: "ZoiPer", logo: "/logos/zoiper.png" },
+  { name: "Amazon Web Services", logo: "/logos/awsLogo.png" },
 ];
 
 export default function Partners() {
@@ -30,7 +30,7 @@ export default function Partners() {
     },
     [
       AutoPlay({
-        delay: 1000,
+        delay: 1200,
         stopOnInteraction: false,
         stopOnMouseEnter: true,
       }),
@@ -54,15 +54,15 @@ export default function Partners() {
           </p>
         </div>
 
-        <div className="mt-12 overflow-hidden" ref={emblaRef}>
+        <div className="mt-12 overflow-hidden w-full" ref={emblaRef}>
           <div className="flex gap-8">
             {/* Duplicamos los partners para crear efecto infinito visual */}
             {[...partners, ...partners].map((partner, idx) => (
               <div
                 key={`${partner.name}-${idx}`}
-                className="embla__slide relative flex min-w-45 flex-shrink-0 items-center justify-center sm:min-w-[220px]"
+                className="embla__slide relative flex min-w-full shrink-0 items-center justify-center sm:min-w-55"
               >
-                <div className="group flex h-20 w-full items-center justify-center rounded-xl border border-neutral-200 bg-white px-6 transition-all duration-300 hover:border-brand-primary/30 hover:shadow-lg">
+                <div className="group flex h-20 w-full items-center justify-center  bg-white px-6 transition-all duration-300">
                   <Image
                     src={partner.logo}
                     alt={partner.name}

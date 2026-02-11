@@ -35,10 +35,10 @@ const testimonials = [
 
 export default function Testimonials() {
   const headerRef = useGsapReveal({ y: 40, duration: 0.7 });
-  const gridRef = useGsapStagger({ y: 50, stagger: 0.2, duration: 0.7, start: "top 80%" });
+  const gridRef = useGsapStagger({ y: 50, stagger: 0.2, duration: 0.6, start: "top 80%" });
 
   return (
-    <section id="testimonios" className="bg-brand-cream py-20 sm:py-28">
+    <section id="testimonios" className=" py-15 h-[80vh] sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
@@ -60,7 +60,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial) => (
             <Card
               key={testimonial.name}
-              className="border-neutral-200 bg-white shadow-sm transition-all hover:shadow-lg"
+              className="border-neutral-200 bg-whiteshadow-sm transition-all hover:shadow-lg"
             >
               <CardContent className="pt-6">
                 {/* Stars */}

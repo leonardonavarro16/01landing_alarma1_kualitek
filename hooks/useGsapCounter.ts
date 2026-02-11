@@ -28,9 +28,8 @@ export function useGsapCounter(options: CounterOptions) {
       ease: "power1.out",
       scrollTrigger: {
         trigger: el,
-         start: "top center",
-        end: "bottom center",
-        scrub: true,
+        start: "top 80%",
+        toggleActions: "play none none none",
       },
       onUpdate: () => {
         const rounded = Math.round(obj.val);
