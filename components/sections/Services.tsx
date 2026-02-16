@@ -45,6 +45,7 @@ const benefits = [
       "Historial de eventos detallado",
       "Control por zonas independientes",
     ],
+    image: "/image-service2.png",
     placeholderType: "blur" as const,
   },
   {
@@ -62,6 +63,7 @@ const benefits = [
       "Instalación en 1-2 días máximo",
       "Cobertura completa sin puntos ciegos",
     ],
+    image: "/image-service1.png",
     placeholderType: "pattern" as const,
   },
   {
@@ -249,10 +251,20 @@ export default function Services() {
                       isImageLeft ? "order-2 lg:order-1" : "order-2"
                     }`}
                   >
-                    <BenefitPlaceholder
-                      type={benefit.placeholderType}
-                      Icon={benefit.icon}
-                    />
+                    {benefit.image ? (
+                      <div className="relative aspect-3/4 max-h-125 mx-auto overflow-hidden rounded-2xl shadow-lg">
+                        <img
+                          src={benefit.image}
+                          alt={benefit.title}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <BenefitPlaceholder
+                        type={benefit.placeholderType}
+                        Icon={benefit.icon}
+                      />
+                    )}
                   </div>
 
                   {/* Content */}

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Grainient from "@/components/Grainient";
+import { VideoBackground } from "@/components/VideoBackground";
 import { gsap } from "@/lib/gsap";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -108,13 +108,11 @@ export default function Hero() {
 
   return (
     <section id="contacto" className="relative min-h-screen bg-neutral-900">
-      {/* Temporary background (replace with video later) */}
-      <div className="absolute inset-0">
-        <Grainient className="h-full w-full" />
-      </div>
+      {/* Video background */}
+      <VideoBackground src="/video-hero.mp4" />
 
       {/* Dark overlay for readability */}
-      <div className="pointer-events-none absolute inset-0 bg-black/40" />
+      <div className="pointer-events-none absolute inset-0 bg-black/50" />
 
       <div className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 py-16 sm:py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         {/* Left: Copy */}

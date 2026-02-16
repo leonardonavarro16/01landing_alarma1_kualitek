@@ -7,15 +7,14 @@ import AutoPlay from "embla-carousel-autoplay";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 const partners = [
-  { name: "Yealink", logo: "/logos/Yealink_logo.png" },
-  { name: "Dahua", logo: "/logos/dahua_logo.png" },
-  { name: "Hikvision", logo: "/logos/hikvision_logo.png" },
-  { name: "Ubiquiti", logo: "/logos/Ubiquiti_Logo.png" },
+  //{ name: "Yealink", logo: "/logos/Yealink_logo.png" },
+  //{ name: "Dahua", logo: "/logos/dahua_logo.png" },
+  //{ name: "Hikvision", logo: "/logos/hikvision_logo.png" },
+  //{ name: "Ubiquiti", logo: "/logos/Ubiquiti_Logo.png" },
   { name: "Google Partner", logo: "/logos/googlePartnersLogo.png" },
   { name: "Cisco", logo: "/logos/ciscoLogo.png" },
-  { name: "MikroTik", logo: "/logos/microrik logo.png" },
-  { name: "ZoiPer", logo: "/logos/zoiper.png" },
-  { name: "Amazon Web Services", logo: "/logos/awsLogo.png" },
+  //{ name: "MikroTik", logo: "/logos/microrik logo.png" },
+  { name: "Amazon Web Services", logo: "/logos/aws-partner-logo.png" },
 ];
 
 export default function Partners() {

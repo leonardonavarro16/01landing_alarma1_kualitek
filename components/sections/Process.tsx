@@ -72,8 +72,8 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="proceso" className="bg-black py-20  sm:py-28 h-[75vh]">
-      <div className="mx-auto  max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="proceso" className="bg-black py-16 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div ref={headerRef} className="mx-auto max-w-2xl text-center">
           <Badge
             variant="secondary"

@@ -70,26 +70,31 @@ export default function Navbar() {
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-72 border-neutral-200 bg-white">
-            <nav className="mt-8 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-lg font-medium text-neutral-700 transition-colors hover:text-brand-primary"
+          <SheetContent side="right" className="w-80 border-neutral-200 bg-white px-6 pt-20 pb-8">
+            <nav className="flex h-full flex-col">
+              <div className="mt-4 flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-4 py-3 text-base font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-brand-primary"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+              <div className="mt-8 px-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full bg-brand-primary font-semibold text-white shadow-lg shadow-brand-primary/25 hover:bg-brand-primary-dark transition-colors"
                 >
-                  {link.label}
-                </a>
-              ))}
-              <Button
-                asChild
-                className="mt-4 bg-brand-primary font-semibold text-white hover:bg-brand-primary-dark"
-              >
-                <a href="#contacto" onClick={() => setOpen(false)}>
-                  Pedir Presupuesto
-                </a>
-              </Button>
+                  <a href="#contacto" onClick={() => setOpen(false)}>
+                    Pedir Presupuesto
+                  </a>
+                </Button>
+              </div>
             </nav>
           </SheetContent>
         </Sheet>
